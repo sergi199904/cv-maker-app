@@ -145,13 +145,28 @@ const DashboardPage = () => {
       {/* CVs Section */}
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-gray-900">Your CVs</h2>
-        <Link 
-          to="/cv/new" 
-          className="btn btn-primary"
-        >
-          <Plus className="h-5 w-5 mr-2" />
-          Create New CV
-        </Link>
+        {stats && stats.cvCount >= stats.cvLimit && !user?.isPremium ? (
+          <div className="flex items-center space-x-3">
+            <span className="text-sm text-red-600">
+              CV limit reached ({stats.cvCount}/{stats.cvLimit})
+            </span>
+            <Link 
+              to="/upgrade" 
+              className="btn btn-primary"
+            >
+              <Crown className="h-5 w-5 mr-2" />
+              Upgrade to Create More
+            </Link>
+          </div>
+        ) : (
+          <Link 
+            to="/cv/new" 
+            className="btn btn-primary"
+          >
+            <Plus className="h-5 w-5 mr-2" />
+            Create New CV
+          </Link>
+        )}
       </div>
 
       {/* CVs Grid */}

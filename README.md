@@ -77,10 +77,10 @@ cv-maker-app/
 
 ### Prerequisites
 - Node.js (v16 or higher)
-- MongoDB (local or cloud instance)
+- MongoDB (local or cloud instance like MongoDB Atlas)
 - npm or yarn package manager
 
-### Installation
+### Quick Start
 
 1. **Clone the repository**
    ```bash
@@ -88,37 +88,83 @@ cv-maker-app/
    cd cv-maker-app
    ```
 
-2. **Backend Setup**
+2. **Install all dependencies**
    ```bash
+   npm run install:all
+   ```
+
+3. **Environment Setup**
+   ```bash
+   # Backend environment
    cd backend
-   npm install
    cp .env.example .env
    # Edit .env with your MongoDB URI and JWT secret
-   npm run dev
-   ```
-
-3. **Frontend Setup**
-   ```bash
-   cd frontend
-   npm install
+   
+   # Frontend environment  
+   cd ../frontend
    cp .env.example .env
    # Edit .env if needed (API URL should match backend)
-   npm run dev
    ```
 
-4. **Access the Application**
+4. **Database Setup**
+   ```bash
+   # Seed templates (make sure MongoDB is running)
+   npm run seed:templates
+   ```
+
+5. **Start Development Servers**
+   ```bash
+   # Start both frontend and backend concurrently
+   npm run dev
+   
+   # Or start them separately:
+   # npm run dev:backend  # Backend on http://localhost:5000
+   # npm run dev:frontend # Frontend on http://localhost:3000
+   ```
+
+6. **Access the Application**
    - Frontend: http://localhost:3000
    - Backend API: http://localhost:5000
 
+### Manual Setup (Alternative)
+
+If you prefer to set up each part manually:
+
+**Backend Setup:**
+```bash
+cd backend
+npm install
+cp .env.example .env
+# Configure your .env file
+node seed/templates.js  # Seed templates
+npm run dev
+```
+
+**Frontend Setup:**
+```bash
+cd frontend
+npm install
+cp .env.example .env
+# Configure your .env file
+npm run dev
+```
+
 ### Development Scripts
+
+**Root Level (Monorepo):**
+- `npm run dev` - Start both frontend and backend concurrently
+- `npm run install:all` - Install dependencies for all packages
+- `npm run seed:templates` - Seed database with CV templates
+- `npm run build` - Build frontend for production
+- `npm run test` - Run tests for both frontend and backend
 
 **Backend:**
 - `npm run dev` - Start development server with nodemon
 - `npm start` - Start production server
-- `npm test` - Run tests
+- `npm test` - Run backend tests
 
 **Frontend:**
-- `npm run dev` - Start development server
+- `npm run dev` - Start development server with Vite
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
 - `npm run lint` - Run ESLint
@@ -126,21 +172,26 @@ cv-maker-app/
 ## 📊 Data Models
 
 ### User Model
-- Basic profile information (name, email)
-- Authentication credentials
-- Subscription type (free, premium, enterprise)
-- Usage limits and tracking
-- Premium features flags
+- Basic profile information (firstName, lastName, email)
+- Authentication credentials (password with bcrypt hashing)
+- Subscription management (subscriptionType: free, premium, enterprise)
+- Usage limits and tracking (cvLimit, downloadLimit, downloadsThisMonth)
+- Premium features flags (isPremium)
 
 ### CV Model
-- Personal information section
-- Contact details
-- Professional experience entries
-- Education history
-- Skills categorization
-- Projects, certifications, languages
-- Template and theme customization
-- Analytics (views, downloads)
+- **Personal Information**: firstName, lastName, title, summary, profileImage
+- **Contact Details**: email, phone, address, city, country, linkedin, github, portfolio, website
+- **Professional Experience**: Array of experience entries with company, position, dates, description
+- **Education History**: Array of education entries with institution, degree, field, dates
+- **Skills Categorization**: Array of skills with name, level, category
+- **Additional Sections**: projects, certifications, languages (premium features)
+- **Template and Theme**: template selection, color scheme, typography
+- **Analytics**: views, downloads, sharing metrics
+
+### Template Model
+- Template metadata (id, name, description, category)
+- Premium tier classification (isPremium)
+- Preview assets and active status
 
 ## 🔐 Authentication & Authorization
 
@@ -199,6 +250,23 @@ FRONTEND_URL=http://localhost:3000
 VITE_API_URL=http://localhost:5000/api
 VITE_APP_NAME=CV Maker
 ```
+
+## 🗃️ Database Setup
+
+### Initial Setup
+1. Make sure MongoDB is running on your system
+2. Run the template seeder to populate initial templates:
+   ```bash
+   npm run seed:templates
+   ```
+
+This will create the following templates:
+- **Classic** (Free) - Traditional CV layout with clean typography
+- **Modern** (Premium) - Contemporary design with color accents  
+- **Creative** (Premium) - Eye-catching design for creative professionals
+- **Minimal** (Premium) - Clean and minimal design focused on content
+- **Executive** (Premium) - Professional template for senior positions
+- **Designer** (Premium) - Visually striking template for design professionals
 
 ## 🤝 Contributing
 

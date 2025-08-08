@@ -26,7 +26,21 @@ const CVEditorPage = () => {
 
   useEffect(() => {
     if (currentCV && id) {
-      setCVData(currentCV);
+      // Normalize CV data for backward compatibility
+      const normalizedCV = { ...currentCV };
+      
+      // Handle old format with 'personal' field
+      if (normalizedCV.personal && !normalizedCV.personalInfo) {
+        normalizedCV.personalInfo = normalizedCV.personal;
+        delete normalizedCV.personal;
+      }
+      
+      // Ensure contact object exists
+      if (!normalizedCV.contact) {
+        normalizedCV.contact = {};
+      }
+      
+      setCVData(normalizedCV);
     }
   }, [currentCV, id]);
 

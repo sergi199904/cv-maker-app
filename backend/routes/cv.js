@@ -2,7 +2,9 @@ const express = require('express');
 const { body, validationResult } = require('express-validator');
 const CV = require('../models/CV');
 const User = require('../models/User');
+const Template = require('../models/Template');
 const { auth, requirePremium, checkDownloadLimit } = require('../middleware/auth');
+const { normalizeCvPayload, validateCvPayload } = require('../utils/normalizeCvPayload');
 
 const router = express.Router();
 
@@ -56,14 +58,19 @@ router.get('/:id', auth, async (req, res) => {
 // @access  Private
 router.post('/', [
   auth,
-  body('title').trim().notEmpty(),
-  body('personalInfo.firstName').trim().notEmpty(),
-  body('personalInfo.lastName').trim().notEmpty()
+  body('title').trim().notEmpty()
 ], async (req, res) => {
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+    // Normalize payload for backward compatibility
+    const normalizedPayload = normalizeCvPayload(req.body);
+    
+    // Validate normalized payload
+    const validationErrors = validateCvPayload(normalizedPayload);
+    if (validationErrors.length > 0) {
+      return res.status(400).json({ 
+        message: 'Validation failed', 
+        errors: validationErrors 
+      });
     }
 
     // Check CV limit for free users
@@ -85,7 +92,7 @@ router.post('/', [
 
     const cvData = {
       userId: req.user._id,
-      ...req.body
+      ...normalizedPayload
     };
 
     const cv = new CV(cvData);
@@ -106,14 +113,19 @@ router.post('/', [
 // @access  Private
 router.put('/:id', [
   auth,
-  body('title').trim().notEmpty(),
-  body('personalInfo.firstName').trim().notEmpty(),
-  body('personalInfo.lastName').trim().notEmpty()
+  body('title').trim().notEmpty()
 ], async (req, res) => {
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+    // Normalize payload for backward compatibility
+    const normalizedPayload = normalizeCvPayload(req.body);
+    
+    // Validate normalized payload
+    const validationErrors = validateCvPayload(normalizedPayload);
+    if (validationErrors.length > 0) {
+      return res.status(400).json({ 
+        message: 'Validation failed', 
+        errors: validationErrors 
+      });
     }
 
     const cv = await CV.findOne({ 
@@ -127,7 +139,7 @@ router.put('/:id', [
     }
 
     // Update CV data
-    Object.assign(cv, req.body);
+    Object.assign(cv, normalizedPayload);
     await cv.save();
 
     res.json({
@@ -203,50 +215,24 @@ router.post('/:id/download', [auth, checkDownloadLimit], async (req, res) => {
   }
 });
 
-// @route   GET /api/cv/templates
+// @route   GET /api/cv/templates/list
 // @desc    Get available CV templates
 // @access  Private
 router.get('/templates/list', auth, async (req, res) => {
   try {
-    const templates = [
-      {
-        id: 'classic',
-        name: 'Classic',
-        description: 'Traditional CV layout with clean typography',
-        isPremium: false,
-        preview: '/templates/classic-preview.png'
-      },
-      {
-        id: 'modern',
-        name: 'Modern',
-        description: 'Contemporary design with color accents',
-        isPremium: true,
-        preview: '/templates/modern-preview.png'
-      },
-      {
-        id: 'creative',
-        name: 'Creative',
-        description: 'Eye-catching design for creative professionals',
-        isPremium: true,
-        preview: '/templates/creative-preview.png'
-      },
-      {
-        id: 'minimal',
-        name: 'Minimal',
-        description: 'Clean and minimal design focused on content',
-        isPremium: true,
-        preview: '/templates/minimal-preview.png'
-      }
-    ];
-
+    // Fetch templates from database
+    const allTemplates = await Template.find({ isActive: true }).sort({ isPremium: 1, name: 1 });
+    
     // Filter premium templates for free users
-    const availableTemplates = templates.filter(template => 
+    const availableTemplates = allTemplates.filter(template => 
       !template.isPremium || req.user.isPremium
     );
 
     res.json({
       templates: availableTemplates,
-      userType: req.user.subscriptionType
+      userType: req.user.subscriptionType,
+      total: allTemplates.length,
+      available: availableTemplates.length
     });
   } catch (error) {
     console.error('Get templates error:', error);
