@@ -1,240 +1,240 @@
 # CV Maker App
 
-A modern, full-stack web application for creating, customizing, and downloading professional CVs. Built with React, Node.js, Express, and MongoDB.
+Una aplicación web moderna full-stack para crear, personalizar y descargar currículums profesionales. Construida con React, Node.js, Express y MongoDB.
 
-## 🎯 Vision
+## 🎯 Visión
 
-CV Maker App empowers users without technical knowledge to create professional CVs that help them land their dream jobs. From students to experienced professionals, our platform provides an intuitive, guided experience for building standout resumes.
+CV Maker App empodera a usuarios sin conocimientos técnicos para crear CVs profesionales que les ayuden a conseguir el trabajo de sus sueños. Desde estudiantes hasta profesionales experimentados, nuestra plataforma ofrece una experiencia intuitiva y eficiente.
 
-## ✨ Features (MVP)
+## ✨ Funcionalidades (MVP)
 
-### Core Functionality
-- **User Authentication**: Secure registration and login system
-- **Guided CV Creation**: Step-by-step form for personal data, experience, education, and skills
-- **Real-time Preview**: Live preview of CV as users edit content
-- **Template Selection**: Professional templates (Classic template included)
-- **PDF Download**: Instant PDF generation and download
-- **Multiple CVs**: Create, edit, and manage multiple CVs
+### Funcionalidades Principales
+- **Autenticación de Usuario**: Sistema seguro de registro e inicio de sesión
+- **Creación Guiada de CV**: Formulario paso a paso para datos personales, experiencia, educación y habilidades
+- **Vista Previa en Tiempo Real**: Previsualización mientras el usuario edita el contenido
+- **Selección de Plantillas**: Plantillas profesionales (incluye la plantilla Clásica)
+- **Descarga en PDF**: Generación y descarga instantánea en PDF
+- **Múltiples CVs**: Crear, editar y gestionar múltiples CVs
 
-### Premium Features (Structure Ready)
-- **Premium Templates**: Additional professional templates
-- **Advanced Customization**: Colors, fonts, and layout options
-- **Multiple Export Formats**: PDF, Word, etc.
-- **AI-Powered Suggestions**: Content recommendations (future)
-- **Priority Support**: Enhanced customer support
+### Funcionalidades Premium (Estructura Lista)
+- **Plantillas Premium**: Plantillas adicionales profesionales
+- **Personalización Avanzada**: Colores, tipografías y opciones de layout
+- **Múltiples Formatos de Exportación**: PDF, Word, etc.
+- **Sugerencias con IA**: Recomendaciones de contenido (futuro)
+- **Soporte Prioritario**: Atención al cliente mejorada
 
-## 🛠 Tech Stack
+## 🛠 Stack Tecnológico
 
 ### Frontend
-- **React 18** with Vite for fast development
-- **Tailwind CSS** for modern, responsive design
-- **React Router** for navigation
-- **Zustand** for state management
-- **React Hook Form** for form handling
-- **Axios** for API communication
+- **React 18** con Vite para desarrollo rápido
+- **Tailwind CSS** para diseño moderno y responsive
+- **React Router** para navegación
+- **Zustand** para gestión de estado
+- **React Hook Form** para manejo de formularios
+- **Axios** para comunicación con la API
 
 ### Backend
-- **Node.js** with Express framework
-- **MongoDB** with Mongoose ODM
-- **JWT** for authentication
-- **bcryptjs** for password hashing
-- **Express Validator** for input validation
-- **Puppeteer** for PDF generation (ready for implementation)
+- **Node.js** con Express
+- **MongoDB** con Mongoose ODM
+- **JWT** para autenticación
+- **bcryptjs** para hash de contraseñas
+- **Express Validator** para validación de entradas
+- **Puppeteer** para generación de PDF (listo para implementar)
 
-## 📁 Project Structure
+## 📁 Estructura del Proyecto
 
 ```
 cv-maker-app/
-├── backend/                 # Node.js/Express API server
-│   ├── models/             # MongoDB data models
-│   │   ├── User.js        # User model with subscription support
-│   │   └── CV.js          # CV model with all sections
-│   ├── routes/            # API routes
-│   │   ├── auth.js        # Authentication endpoints
-│   │   ├── cv.js          # CV management endpoints
-│   │   └── user.js        # User profile endpoints
-│   ├── middleware/        # Custom middleware
-│   │   └── auth.js        # JWT authentication middleware
-│   ├── config/           # Configuration files
-│   ├── utils/            # Utility functions
-│   ├── server.js         # Express server setup
-│   └── package.json      # Backend dependencies
-├── frontend/              # React application
+├── backend/                 # Servidor API Node.js/Express
+│   ├── models/              # Modelos de datos MongoDB
+│   │   ├── User.js          # Modelo de usuario con soporte de suscripción
+│   │   └── CV.js            # Modelo de CV con todas las secciones
+│   ├── routes/              # Rutas API
+│   │   ├── auth.js          # Endpoints de autenticación
+│   │   ├── cv.js            # Endpoints de gestión de CV
+│   │   └── user.js          # Endpoints de perfil de usuario
+│   ├── middleware/          # Middleware personalizado
+│   │   └── auth.js          # Middleware de autenticación JWT
+│   ├── config/              # Archivos de configuración
+│   ├── utils/               # Funciones utilitarias
+│   ├── server.js            # Configuración del servidor Express
+│   └── package.json         # Dependencias del backend
+├── frontend/                # Aplicación React
 │   ├── src/
-│   │   ├── components/   # Reusable UI components
-│   │   ├── pages/        # Route components
-│   │   ├── store/        # Zustand state management
-│   │   ├── services/     # API service layer
-│   │   ├── hooks/        # Custom React hooks
-│   │   ├── utils/        # Utility functions
-│   │   └── styles/       # Global styles
-│   ├── public/           # Static assets
-│   └── package.json      # Frontend dependencies
-└── README.md             # Project documentation
+│   │   ├── components/      # Componentes reutilizables
+│   │   ├── pages/           # Componentes de rutas
+│   │   ├── store/           # Gestión de estado (Zustand)
+│   │   ├── services/        # Capa de servicios API
+│   │   ├── hooks/           # Custom hooks
+│   │   ├── utils/           # Utilidades
+│   │   └── styles/          # Estilos globales
+│   ├── public/              # Recursos estáticos
+│   └── package.json         # Dependencias del frontend
+└── README.md                # Documentación del proyecto
 ```
 
-## 🚀 Getting Started
+## 🚀 Comenzando
 
-### Prerequisites
-- Node.js (v16 or higher)
-- MongoDB (local or cloud instance like MongoDB Atlas)
-- npm or yarn package manager
+### Requisitos Previos
+- Node.js (v16 o superior)
+- MongoDB (local o en la nube, ej. MongoDB Atlas)
+- Gestor de paquetes npm o yarn
 
-### Quick Start
+### Inicio Rápido
 
-1. **Clone the repository**
+1. **Clonar el repositorio**
    ```bash
    git clone <repository-url>
    cd cv-maker-app
    ```
 
-2. **Install all dependencies**
+2. **Instalar todas las dependencias**
    ```bash
    npm run install:all
    ```
 
-3. **Environment Setup**
+3. **Configurar Entornos**
    ```bash
-   # Backend environment
+   # Backend
    cd backend
    cp .env.example .env
-   # Edit .env with your MongoDB URI and JWT secret
+   # Edita .env con tu URI de MongoDB y tu JWT secret
    
-   # Frontend environment  
+   # Frontend
    cd ../frontend
    cp .env.example .env
-   # Edit .env if needed (API URL should match backend)
+   # Edita .env si es necesario (API URL debe apuntar al backend)
    ```
 
-4. **Database Setup**
+4. **Configurar Base de Datos**
    ```bash
-   # Seed templates (make sure MongoDB is running)
+   # Poblar plantillas (asegúrate que MongoDB está corriendo)
    npm run seed:templates
    ```
 
-5. **Start Development Servers**
+5. **Iniciar Servidores de Desarrollo**
    ```bash
-   # Start both frontend and backend concurrently
+   # Iniciar frontend y backend concurrentemente
    npm run dev
    
-   # Or start them separately:
-   # npm run dev:backend  # Backend on http://localhost:5000
-   # npm run dev:frontend # Frontend on http://localhost:3000
+   # O iniciarlos por separado:
+   # npm run dev:backend  # Backend en http://localhost:5000
+   # npm run dev:frontend # Frontend en http://localhost:3000
    ```
 
-6. **Access the Application**
+6. **Acceder a la Aplicación**
    - Frontend: http://localhost:3000
    - Backend API: http://localhost:5000
 
-### Manual Setup (Alternative)
+### Configuración Manual (Alternativa)
 
-If you prefer to set up each part manually:
+Si prefieres configurar cada parte manualmente:
 
-**Backend Setup:**
+**Backend:**
 ```bash
 cd backend
 npm install
 cp .env.example .env
-# Configure your .env file
-node seed/templates.js  # Seed templates
+# Configura tu archivo .env
+node seed/templates.js  # Poblar plantillas
 npm run dev
 ```
 
-**Frontend Setup:**
+**Frontend:**
 ```bash
 cd frontend
 npm install
 cp .env.example .env
-# Configure your .env file
+# Configura tu archivo .env
 npm run dev
 ```
 
-### Development Scripts
+### Scripts de Desarrollo
 
-**Root Level (Monorepo):**
-- `npm run dev` - Start both frontend and backend concurrently
-- `npm run install:all` - Install dependencies for all packages
-- `npm run seed:templates` - Seed database with CV templates
-- `npm run build` - Build frontend for production
-- `npm run test` - Run tests for both frontend and backend
+**Nivel Root (Monorepo):**
+- `npm run dev` - Inicia frontend y backend
+- `npm run install:all` - Instala dependencias de todos los paquetes
+- `npm run seed:templates` - Pobla la base de datos con plantillas
+- `npm run build` - Construye el frontend para producción
+- `npm run test` - Ejecuta tests frontend y backend
 
 **Backend:**
-- `npm run dev` - Start development server with nodemon
-- `npm start` - Start production server
-- `npm test` - Run backend tests
+- `npm run dev` - Servidor de desarrollo con nodemon
+- `npm start` - Servidor de producción
+- `npm test` - Tests del backend
 
 **Frontend:**
-- `npm run dev` - Start development server with Vite
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
+- `npm run dev` - Desarrollo con Vite
+- `npm run build` - Build de producción
+- `npm run preview` - Vista previa del build
+- `npm run lint` - Ejecuta ESLint
 
-## 📊 Data Models
+## 📊 Modelos de Datos
 
-### User Model
-- Basic profile information (firstName, lastName, email)
-- Authentication credentials (password with bcrypt hashing)
-- Subscription management (subscriptionType: free, premium, enterprise)
-- Usage limits and tracking (cvLimit, downloadLimit, downloadsThisMonth)
-- Premium features flags (isPremium)
+### Modelo Usuario
+- Información básica (firstName, lastName, email)
+- Credenciales (password con hashing bcrypt)
+- Gestión de suscripciones (subscriptionType: free, premium, enterprise)
+- Límites y seguimiento de uso (cvLimit, downloadLimit, downloadsThisMonth)
+- Flags de características premium (isPremium)
 
-### CV Model
-- **Personal Information**: firstName, lastName, title, summary, profileImage
-- **Contact Details**: email, phone, address, city, country, linkedin, github, portfolio, website
-- **Professional Experience**: Array of experience entries with company, position, dates, description
-- **Education History**: Array of education entries with institution, degree, field, dates
-- **Skills Categorization**: Array of skills with name, level, category
-- **Additional Sections**: projects, certifications, languages (premium features)
-- **Template and Theme**: template selection, color scheme, typography
-- **Analytics**: views, downloads, sharing metrics
+### Modelo CV
+- **Información Personal**: firstName, lastName, title, summary, profileImage
+- **Contacto**: email, phone, address, city, country, linkedin, github, portfolio, website
+- **Experiencia Profesional**: Array con empresa, puesto, fechas, descripción
+- **Educación**: Array con institución, grado, campo, fechas
+- **Habilidades**: Array con nombre, nivel, categoría
+- **Secciones Adicionales**: proyectos, certificaciones, idiomas (premium)
+- **Plantilla y Tema**: selección de plantilla, esquema de color, tipografía
+- **Analítica**: vistas, descargas, métricas de compartido
 
-### Template Model
-- Template metadata (id, name, description, category)
-- Premium tier classification (isPremium)
-- Preview assets and active status
+### Modelo Plantilla
+- Metadatos (id, name, description, category)
+- Clasificación premium (isPremium)
+- Recursos de vista previa y estado activo
 
-## 🔐 Authentication & Authorization
+## 🔐 Autenticación & Autorización
 
-- JWT-based authentication
-- Role-based access control (free vs premium users)
-- Protected routes and API endpoints
-- Automatic token refresh handling
-- Secure password hashing with bcrypt
+- Autenticación basada en JWT
+- Control de acceso por rol (usuarios free vs premium)
+- Rutas y endpoints protegidos
+- Manejo de refresco de token
+- Hash seguro de contraseñas con bcrypt
 
-## 💳 Monetization Strategy (Ready for Implementation)
+## 💳 Estrategia de Monetización (Lista para Implementar)
 
-### Freemium Model
-- **Free Tier**: 3 CVs, 1 basic template, 5 downloads/month
-- **Premium Tier**: Unlimited CVs, all templates, unlimited downloads
-- **Enterprise Tier**: Advanced features, AI assistance, priority support
+### Modelo Freemium
+- **Free**: 3 CVs, 1 plantilla básica, 5 descargas/mes
+- **Premium**: CVs ilimitados, todas las plantillas, descargas ilimitadas
+- **Enterprise**: Funcionalidades avanzadas, asistencia IA, soporte prioritario
 
-### Revenue Streams
-- Monthly/yearly subscriptions
-- One-time template purchases
-- Premium feature add-ons
-- Enterprise custom solutions
+### Fuentes de Ingreso
+- Suscripciones mensuales/anuales
+- Compra individual de plantillas
+- Add-ons de funcionalidades premium
+- Soluciones personalizadas enterprise
 
-## 🚀 Future Enhancements
+## 🚀 Mejoras Futuras
 
-### Short Term
-- PDF generation implementation
-- Email CV sharing
-- CV analytics dashboard
-- Mobile responsive improvements
+### Corto Plazo
+- Implementación generación PDF
+- Compartir CV por email
+- Dashboard de analíticas
+- Mejoras responsive móviles
 
-### Medium Term
-- AI-powered content suggestions
-- Industry-specific templates
-- Social media integration
-- Collaborative CV editing
+### Medio Plazo
+- Sugerencias de contenido con IA
+- Plantillas específicas por industria
+- Integración con redes sociales
+- Edición colaborativa de CV
 
-### Long Term
-- Multi-language support
-- Video CV creation
-- Interview preparation tools
-- Job matching integration
+### Largo Plazo
+- Soporte multi-idioma
+- Creación de Video CV
+- Herramientas de preparación de entrevistas
+- Integración de matching de empleo
 
-## 🔧 Environment Variables
+## 🔧 Variables de Entorno
 
 ### Backend (.env)
 ```env
@@ -251,39 +251,39 @@ VITE_API_URL=http://localhost:5000/api
 VITE_APP_NAME=CV Maker
 ```
 
-## 🗃️ Database Setup
+## 🗃️ Configuración de la Base de Datos
 
-### Initial Setup
-1. Make sure MongoDB is running on your system
-2. Run the template seeder to populate initial templates:
+### Configuración Inicial
+1. Asegúrate de que MongoDB está corriendo
+2. Ejecuta el seeder de plantillas:
    ```bash
    npm run seed:templates
    ```
 
-This will create the following templates:
-- **Classic** (Free) - Traditional CV layout with clean typography
-- **Modern** (Premium) - Contemporary design with color accents  
-- **Creative** (Premium) - Eye-catching design for creative professionals
-- **Minimal** (Premium) - Clean and minimal design focused on content
-- **Executive** (Premium) - Professional template for senior positions
-- **Designer** (Premium) - Visually striking template for design professionals
+Esto creará las siguientes plantillas:
+- **Classic** (Free) - Layout tradicional con tipografía limpia
+- **Modern** (Premium) - Diseño contemporáneo con acentos de color
+- **Creative** (Premium) - Diseño llamativo para perfiles creativos
+- **Minimal** (Premium) - Diseño limpio y enfocado en contenido
+- **Executive** (Premium) - Plantilla profesional para puestos senior
+- **Designer** (Premium) - Plantilla visualmente impactante para diseño
 
-## 🤝 Contributing
+## 🤝 Contribuir
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. Haz fork del repositorio
+2. Crea una rama de feature (`git checkout -b feature/mi-nueva-feature`)
+3. Commit a tus cambios (`git commit -m 'Agrega nueva feature'`)
+4. Haz push a la rama (`git push origin feature/mi-nueva-feature`)
+5. Abre un Pull Request
 
-## 📝 License
+## 📝 Licencia
 
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+Este proyecto está bajo la licencia Apache 2.0 - ver el archivo [LICENSE](LICENSE) para más detalles.
 
-## 🙋‍♂️ Support
+## 🙋‍♂️ Soporte
 
-For support, email support@cvmaker.com or join our Slack channel.
+Para soporte, escribe a support@cvmaker.com o únete a nuestro canal de Slack.
 
 ---
 
-**Made with ❤️ for job seekers worldwide**
+Hecho con ❤️ para quienes buscan nuevas oportunidades profesionales
