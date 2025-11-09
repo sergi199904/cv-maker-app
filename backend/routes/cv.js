@@ -5,6 +5,7 @@ const User = require('../models/User');
 const Template = require('../models/Template');
 const { auth, requirePremium, checkDownloadLimit } = require('../middleware/auth');
 const { normalizeCvPayload, validateCvPayload } = require('../utils/normalizeCvPayload');
+const { generatePDF } = require('../utils/pdfGenerator');
 
 const router = express.Router();
 
@@ -179,7 +180,7 @@ router.delete('/:id', auth, async (req, res) => {
 });
 
 // @route   POST /api/cv/:id/download
-// @desc    Download CV as PDF (placeholder for PDF generation)
+// @desc    Download CV as PDF
 // @access  Private
 router.post('/:id/download', [auth, checkDownloadLimit], async (req, res) => {
   try {
@@ -187,11 +188,17 @@ router.post('/:id/download', [auth, checkDownloadLimit], async (req, res) => {
       _id: req.params.id, 
       userId: req.user._id,
       isActive: true 
-    });
+    }).populate('userId', 'firstName lastName');
     
     if (!cv) {
       return res.status(404).json({ message: 'CV not found' });
     }
+
+    // Get template name (default to classic)
+    const templateName = cv.template?.toLowerCase() || 'classic';
+
+    // Generate PDF
+    const pdfBuffer = await generatePDF(cv.toObject(), templateName);
 
     // Increment download count
     await cv.incrementDownloads();
@@ -202,16 +209,20 @@ router.post('/:id/download', [auth, checkDownloadLimit], async (req, res) => {
       await req.user.save();
     }
 
-    // TODO: Implement actual PDF generation using puppeteer
-    // For now, return success message
-    res.json({
-      message: 'PDF generation initiated',
-      downloadUrl: `/api/cv/${cv._id}/pdf`, // Future implementation
-      downloads: cv.downloads
-    });
+    // Set response headers
+    const filename = `${cv.firstName}_${cv.lastName}_CV.pdf`.replace(/\s+/g, '_');
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader('Content-Length', pdfBuffer.length);
+
+    // Send PDF
+    res.send(pdfBuffer);
   } catch (error) {
     console.error('Download CV error:', error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ 
+      message: 'Error generating PDF', 
+      error: error.message 
+    });
   }
 });
 
